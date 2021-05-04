@@ -1,5 +1,5 @@
 **Spring Easy Proxy**  
-Library gives an ability to make interfaces proxy beans in easy way (Like spring data repositories do)
+Library gives an ability to make spring interface proxy beans in easy way (Like spring data repositories do)
 
 **Getting started**  
 _Maven:_  
