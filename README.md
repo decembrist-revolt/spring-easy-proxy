@@ -64,7 +64,7 @@ _Example:_
 
     @Component
     class AnotherClass {
-        //4. ProxyInterface above will be injected with Interceptor.class handler
+        //4. MarkedProxyInterface above will be injected with Interceptor.class handler
         @Autowired private MarkedProxyInterface proxy;
     }
 
