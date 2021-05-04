@@ -13,7 +13,7 @@ _Gradle:_
 
     implementation "org.decembrist.spring:spring-easy-proxy:1.0.0"
 _Example:_
-1. @EasyProxy  
+@EasyProxy  
 
 
     //1. Define interceptor bean (any org.aopalliance.aop.Advice class)
@@ -38,7 +38,7 @@ _Example:_
         @Autowired private ProxyInterface proxy;
     }
 
-2. @EasyProxyInterface  
+@EasyProxyInterface  
 
 
     //1. Define interceptor bean (any org.aopalliance.aop.Advice class)
