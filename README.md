@@ -1,6 +1,8 @@
 **Spring Easy Proxy**  
 Library gives an ability to make spring interface proxy beans in easy way (Like spring data repositories do)
 
+[![Java CI](https://github.com/decembrist-revolt/spring-easy-proxy/actions/workflows/test.yaml/badge.svg)](https://github.com/decembrist-revolt/spring-easy-proxy/actions/workflows/test.yaml)
+
 **Getting started**  
 _Maven:_  
 
