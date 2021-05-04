@@ -1,0 +1,93 @@
+plugins {
+    id 'java'
+    id 'signing'
+    id 'maven-publish'
+    id 'io.github.gradle-nexus.publish-plugin' version '1.1.0'
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications
+}
+
+group 'org.decembrist.spring'
+version '1.0.0-SNAPSHOT'
+
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
+
+tasks.withType(Sign) {
+    onlyIf { isReleaseVersion }
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+task javadocJar(type: Jar) {
+    getArchiveClassifier().set('javadoc')
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    getArchiveClassifier().set('sources')
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact javadocJar
+            artifact sourcesJar
+
+            pom {
+                name = 'Spring interface bean'
+                description = 'Make bean definers from interfaces'
+                url = 'https://github.com/decembrist-revolt/spring-interface-bean'
+
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'decembrist'
+                        name = 'Nikita Pometun'
+                        email = 'epsilon840@gmail.com'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/decembrist-revolt/spring-interface-bean'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-autoconfigure:${springBootVersion}"
+    implementation "org.springframework:spring-core:${springVersion}"
+    implementation "org.springframework:spring-beans:${springVersion}"
+    implementation "org.springframework:spring-context:${springVersion}"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation 'org.mockito:mockito-core:3.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {  //only for users registered in Sonatype after 24 Feb 2021
+            username = System.getenv('SONATYPE_USERNAME')
+            password = System.getenv('SONATYPE_PASSWORD')
+        }
+    }
+}
