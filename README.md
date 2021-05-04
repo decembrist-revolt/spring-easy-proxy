@@ -12,7 +12,7 @@ _Maven:_
 _Gradle:_  
 
     implementation "org.decembrist.spring:spring-easy-proxy:1.0.0"
-_Example:_
+_Example:_  
 @EasyProxy  
 
 
