@@ -70,6 +70,19 @@ _Example:_
         @Autowired private MarkedProxyInterface proxy;
     }
 
+_Interceptor injection:_
+
+    @Component
+    public class TestInterceptor1 implements MethodInterceptor, ApplicationContextAware {
+    
+        private ApplicationContext applicationContext;
+    
+        //The only way to use another beans from interceptor for now
+        @Override
+        public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+            this.applicationContext = applicationContext;
+        }
+
 _Checked:_
 1. Works for kotlin
 2. @EasyProxyInterface interfaces work as .jar spring boot library component
